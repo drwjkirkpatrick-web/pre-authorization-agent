@@ -1,0 +1,19 @@
+# pre-authorization-agent dependencies
+# Core: standard library only for SQLite, file I/O, text processing
+# Optional: PDF extraction and vision for scanned denial letters
+
+# PDF text extraction (for digital PDF denial letters / EOBs)
+pdfplumber>=0.11.0
+
+# Image OCR fallback (for scanned/image denial letters)
+# Used only when pdfplumber can't extract text (scanned PDFs / photos)
+pytesseract>=0.3.10
+Pillow>=10.0.0
+
+# Testing
+pytest>=8.0.0
+
+# Note: This agent is designed to run as a Hermes skill.
+# Hermes provides Telegram gateway, vision (for scanned letters),
+# cron (for follow-up tracking), and LLM capabilities.
+# No external API keys required for core functionality.

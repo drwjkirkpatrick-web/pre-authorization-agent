@@ -1,0 +1,5 @@
+pre-authorization-agent
+__pycache__/
+*.pyc
+data/preauth.db
+.pytest_cache/
