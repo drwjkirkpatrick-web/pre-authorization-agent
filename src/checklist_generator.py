@@ -307,12 +307,23 @@ class ChecklistGenerator:
             if kb_requirements:
                 using_fallback = False
 
+            # Also fetch general requirements (payer_id=0) that apply to all payers
+            general_kb_reqs = self.kb.get_requirements(0, procedure_id)
+            if general_kb_reqs:
+                # Merge: payer-specific take priority, add general ones not already covered
+                seen_descs = {r["requirement_desc"] for r in kb_requirements}
+                for gr in general_kb_reqs:
+                    if gr["requirement_desc"] not in seen_descs:
+                        kb_requirements.append(gr)
+                if kb_requirements:
+                    using_fallback = False
+
         # Get lessons learned for this payer (and general lessons)
         lessons = []
         if payer_id:
             lessons = self.kb.get_lessons(payer_id=payer_id, procedure_id=procedure_id)
 
-        # If no KB requirements, use general criteria as fallback
+        # If no KB requirements at all, use hardcoded general criteria as fallback
         if not kb_requirements:
             category = _categorize_procedure(procedure_name)
             general = GENERAL_CRITERIA.get(category, GENERAL_CRITERIA["Default"])
