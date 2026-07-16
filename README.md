@@ -161,8 +161,8 @@ result = agent.draft_letter(
         "exam": ["Positive straight leg raise left"],
     },
     practice_info={
-        "practice_name": "Dr. Walker Clinic",
-        "clinician_name": "Walker Kirkpatrick, ND",
+        "practice_name": "Riverside Family Practice",
+        "clinician_name": "Jane Doe, ND",
         # ...
     },
 )
@@ -203,7 +203,7 @@ This agent is designed to work as a Hermes skill. Key integrations:
 - **No fabrication**: Missing information is flagged as `[MISSING]`, never invented.
 - **De-identification**: Patient data in the KB is de-identified (age range, not DOB).
 - **No external PII transmission**: The knowledge base stores *patterns* ("BCBS requires X for MRI"), never patient data.
-- **Clinician approval required**: Per clinic-workflows skill, Walker must approve any output before it's used.
+- **Clinician approval required**: The practitioner must review and approve any output before it's used.
 
 ## Database Schema
 
